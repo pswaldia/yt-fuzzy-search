@@ -10,8 +10,9 @@ services:
             DATABASE_URL: postgres://user:password@postgres:5432/db
             NODE_ENV: development
             PORT: 3000
-            SEARCH_QUERY: java
+            SEARCH_QUERY: springboot
             MAX_RESULTS: 10
+            YOUTUBE_TOKEN: AIzaSyABU3F-EXQalzzwhMaCy_qjtAUJ8MWWgh8
         ports:
             - "8080:3000"
 
