@@ -1,5 +1,6 @@
-export interface videoI{
-    id: number;
+export interface VideoI{
+    id?: number;
+    etag: string;
     title: string;
     description: string;
     channelName: string;

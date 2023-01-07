@@ -8,7 +8,7 @@ export class YtSearchCronService {
 
     constructor(private ytSearchCronMediator: YtSearchCronMediatorService){}
 
-    @Cron('*/5 * * * *')
+    @Cron('*/4 * * * *')
     searchVideos(){
         const methodName: string = "#searchVideos"
         this.logger.log("Request received to run the job to search for youtube videos for predefined search query.", [methodName]);

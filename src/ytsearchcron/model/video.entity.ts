@@ -9,6 +9,10 @@ export class VideoEntity{
     
     @Index()
     @Column()
+    etag: string;
+
+    @Index()
+    @Column()
     title: string;
 
     @Column()
