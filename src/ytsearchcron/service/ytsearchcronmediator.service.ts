@@ -17,11 +17,11 @@ export class YtSearchCronMediatorService {
     async searchAndPersistVideos(){
         const methodName: string = "#searchAndPersistVideos"
         this.logger.log(`${methodName}: Request received to call youtubedatav3Search API to search and save youtube video data in persistence storage.`);
-        const response: VideoI[] = await this.callYoutubeV3SearchAPI();
+        const response: VideoEntity[] = await this.callYoutubeV3SearchAPI();
         await this.persistVideosInfo(response);
     }
 
-    async callYoutubeV3SearchAPI(): Promise<VideoI[]>{
+    async callYoutubeV3SearchAPI(): Promise<VideoEntity[]>{
         const methodName = "#callYoutubeV3SearchAPI";
         this.logger.log(`${methodName}: Request recieved to call youtubevSearch api.`);
         let response = null;
@@ -40,28 +40,29 @@ export class YtSearchCronMediatorService {
         return this.createVideoEntityArray(response);
     }
     
-    createVideoEntityArray(response: any): VideoI[]{
+    createVideoEntityArray(response: any): VideoEntity[]{
         const methodName = "#createVideoEntityArray";
         this.logger.log(`${methodName}: Request recieved to create array of video entities from obtained response.`);
-        const videoMetadataArray: VideoI[] = [];
+        const videoMetadataArray: VideoEntity[] = [];
         response.data.items.forEach((item) => {
             const thumbnails = [];
             Object.entries(item.snippet.thumbnails).forEach(
                 ([key, value]: any) => thumbnails.push(value.url)
             );
-            const videoMetadata: VideoI = {
-                etag: item.etag,
+            const videoMetadata: VideoEntity = {
+                publishedAt: new Date(item.snippet.publishedAt),
                 title: item.snippet.title,
                 description: item.snippet.description,
                 channelName: item.snippet.channelTitle,
                 thumbnails: thumbnails
             }
+            console.log("asadad", videoMetadata)
             videoMetadataArray.push(videoMetadata);
         });
         return videoMetadataArray;
     }
 
-    async persistVideosInfo(videoMetadata: VideoI[]){
+    async persistVideosInfo(videoMetadata: VideoEntity[]){
         const methodName = "#persistVideosInfo";
         this.logger.log(`${methodName}: Request recieved to persist array of video entities into persistence storage.`);
         videoMetadata.forEach(async videoData => {

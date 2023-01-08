@@ -6,7 +6,7 @@
         "table": "video_data",
         "columns": [
           "id",
-          "etag",
+          "published_at",
           "title",
           "description",
           "channel_name",

@@ -22,7 +22,7 @@ services:
         container_name: postgres
         image: postgres:10.4
         ports:
-            - "5432:5432"
+            - "3500:5432"
         command: postgres -c wal_level=logical
         environment: 
             POSTGRES_USER: user

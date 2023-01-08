@@ -1,6 +1,6 @@
 export interface VideoI{
     id?: number;
-    etag: string;
+    published_at: Date;
     title: string;
     description: string;
     channelName: string;

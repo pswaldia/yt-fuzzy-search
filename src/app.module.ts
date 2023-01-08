@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import { YtsearchcronModule } from './ytsearchcron/ytsearchcron.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ScheduleModule } from '@nestjs/schedule';
       synchronize: true
     }),
     YtsearchcronModule,
+    SearchModule,
   ],
   controllers: [AppController],
   providers: [],

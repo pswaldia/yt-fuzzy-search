@@ -5,11 +5,14 @@ import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 })
 export class VideoEntity{
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
     
     @Index()
-    @Column()
-    etag: string;
+    @Column({
+        name: 'published_at',
+        type: 'timestamptz'
+    })
+    publishedAt: Date;
 
     @Index()
     @Column()

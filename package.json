@@ -20,12 +20,16 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^8.5.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/elasticsearch": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/schedule": "^2.1.0",
     "@nestjs/typeorm": "^9.0.1",
+    "@types/elasticsearch": "^5.0.40",
+    "elasticsearch": "^16.7.3",
     "googleapis": "^110.0.0",
     "pg": "^8.8.0",
     "postgres": "^3.3.3",
