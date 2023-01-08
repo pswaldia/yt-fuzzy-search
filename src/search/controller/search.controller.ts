@@ -20,6 +20,8 @@ export class SearchController {
         @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
         @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
     ): Promise<Pagination<VideoEntity>>{
+        const methodName: string = "#index"
+        this.logger.log(`${methodName}: Request received to return all the youtube video data in reverse chronological order and in paginated form.`);
         return await this.searchService.findPaginatedVideos({
             page,
             limit,
