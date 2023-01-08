@@ -11,7 +11,7 @@ export class YtSearchCronService {
     @Cron('* * * * *')
     searchVideos(){
         const methodName: string = "#searchVideos"
-        this.logger.log("Request received to run the job to search for youtube videos for predefined search query.", [methodName]);
+        this.logger.log(`${methodName}: Request received to run the job to search for youtube videos for predefined search query.`);
         this.ytSearchCronMediator.searchAndPersistVideos();
     }
 }
