@@ -6,7 +6,7 @@ import { YtSearchCronMediatorService } from 'src/ytsearchcron/service/ytsearchcr
 import { Repository } from 'typeorm';
 import { SearchService } from '../service/search.service';
 
-@Controller('v1/search')
+@Controller()
 export class SearchController {
     private readonly logger = new Logger(SearchController.name);
 
@@ -14,7 +14,8 @@ export class SearchController {
         private searchService: SearchService
     ) {}
 
-    @Get()
+    
+    @Get('v1/search')
     async index(
         @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
         @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
@@ -24,6 +25,13 @@ export class SearchController {
             limit,
             route: 'http://localhost:8080/yt-fuzzy-search/v1/search',
           });
+    }
+
+    @Get('v2/search')
+    async fuzzySearch(
+        @Query() searchQueryParams: {q: string, count: number}
+    ){
+        return await this.searchService.fuzzySearch(searchQueryParams.q, searchQueryParams.count);
     }
     
 }

@@ -12,6 +12,8 @@ services:
             PORT: 3000
             SEARCH_QUERY: springboot
             MAX_RESULTS: 10
+            ELASTICSEARCH_NODE: http://es-container:9200
+            ELASTICSEARCH_INDEX: video_data
             YOUTUBE_TOKEN: AIzaSyABU3F-EXQalzzwhMaCy_qjtAUJ8MWWgh8
         ports:
             - "8080:3000"
