@@ -1,0 +1,17 @@
+[
+    {
+      "database": "db",
+      "index": "video_data",
+      "nodes": {
+        "table": "video_data",
+        "columns": [
+          "id",
+          "etag",
+          "title",
+          "description",
+          "channel_name",
+          "thumbnails"
+        ]
+      }
+    }
+]

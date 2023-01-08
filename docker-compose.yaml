@@ -15,12 +15,93 @@ services:
             YOUTUBE_TOKEN: AIzaSyABU3F-EXQalzzwhMaCy_qjtAUJ8MWWgh8
         ports:
             - "8080:3000"
+        networks:
+            - nest-network
 
     postgres:
+        container_name: postgres
         image: postgres:10.4
         ports:
-            - "35000:5432"
+            - "5432:5432"
+        command: postgres -c wal_level=logical
         environment: 
             POSTGRES_USER: user
             POSTGRES_PASSWORD: password
             POSTGRES_DB: db
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        networks:
+            - nest-network
+
+    redis:
+        image: 'redis:alpine'
+        container_name: redis
+        ports:
+            - '6379:6379'
+        networks:
+            - nest-network
+
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.5.3
+        container_name: es-container
+        environment:
+            - xpack.security.enabled=false
+            - discovery.type=single-node
+            - bootstrap.memory_lock=true
+            - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+        networks:
+            - nest-network
+        volumes:
+            - esdata:/var/lib/elasticsearch/data
+        ports:
+            - 9200:9200
+
+    kibana:
+        image: docker.elastic.co/kibana/kibana:8.5.3
+        environment:
+            - ELASTICSEARCH_HOSTS=http://es-container:9200
+        networks:
+            - nest-network
+        depends_on:
+            - elasticsearch
+        ports:
+            - 5601:5601
+
+    pgsync:
+        image: pgsync:latest
+        build:
+            context: ./pgsync
+            dockerfile: Dockerfile
+        sysctls:
+            - net.ipv4.tcp_keepalive_time=200
+            - net.ipv4.tcp_keepalive_intvl=200
+            - net.ipv4.tcp_keepalive_probes=5
+        links:
+            - postgres
+            - elasticsearch
+            - redis
+        environment:
+            PG_HOST: postgres
+            POSTGRES_PORT: 5432
+            PG_USER: user
+            PG_PASSWORD: password
+            LOG_INTERVAL: 60
+            ELASTICSEARCH_HOST: es-container
+            ELASTICSEARCH_PORT: 9200
+            ELASTICSEARCH_SCHEME: http
+            REDIS_HOST: redis
+            REDIS_PORT: 6379
+            CONSOLE_LOGGING_HANDLER_MIN_LEVEL: ERROR
+        networks:
+            - nest-network
+
+networks:
+    nest-network:
+        driver: bridge
+volumes:
+    pgdata:
+    esdata:
