@@ -38,9 +38,12 @@ These instructions assume you have *git* installed on your system.
 
     - **health check** : http://localhost:8080/yt-fuzzy-search/health
     - **paginated response api** : http://localhost:8080/yt-fuzzy-search/v1/search
-    - **fuzzy search api** : http://localhost:8080/yt-fuzzy-search/v2/search?q=%22how%20to%20learn%20spring%20boot%22&count=2
+    - **fuzzy search api** : http://localhost:8080/yt-fuzzy-search/v2/search?q=%22how%20to%20learn%20spring%20boot%22&count=2 
 4. Interact with postgres database (assuming you have psql command line implemented. ) using : *psql postgres://user:password@localhost:3500/db*
 5. Interact with elastic search through kibana (dev tools & discover) at http://localhost:5601
+
+**Note** : Depending on the degree of [fuzziness](https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#fuzziness) specified in elastic search query, it returns the results. This field is configurable and can be set accordingly to cater to our needs. In the v2 search api if you specify query terms like : *spirng booot* or *javaa* , it will return the result. 
+
 ## Improvements
 ---
 [(Back to top)](#list-of-contents)
