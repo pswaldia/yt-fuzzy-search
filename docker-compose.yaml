@@ -49,6 +49,7 @@ services:
             - discovery.type=single-node
             - bootstrap.memory_lock=true
             - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+            - logger.level=ERROR
         ulimits:
             memlock:
                 soft: -1
@@ -96,6 +97,7 @@ services:
             REDIS_HOST: redis
             REDIS_PORT: 6379
             CONSOLE_LOGGING_HANDLER_MIN_LEVEL: ERROR
+            POLL_INTERVAL: 60
         networks:
             - nest-network
 
