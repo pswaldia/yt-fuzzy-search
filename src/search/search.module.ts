@@ -1,9 +1,14 @@
 import { Module } from '@nestjs/common';
-import { ServiceService } from './service/service.service';
-import { ControllerController } from './controller/controller.controller';
+import { SearchService } from './service/search.service';
+import { SearchController } from './controller/search.controller';
+import { VideoEntity } from 'src/ytsearchcron/model/video.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  providers: [ServiceService],
-  controllers: [ControllerController]
+  imports: [
+    TypeOrmModule.forFeature([VideoEntity])
+  ],
+  providers: [SearchService],
+  controllers: [SearchController]
 })
 export class SearchModule {}

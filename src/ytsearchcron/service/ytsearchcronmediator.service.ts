@@ -56,7 +56,6 @@ export class YtSearchCronMediatorService {
                 channelName: item.snippet.channelTitle,
                 thumbnails: thumbnails
             }
-            console.log("asadad", videoMetadata)
             videoMetadataArray.push(videoMetadata);
         });
         return videoMetadataArray;
