@@ -3,7 +3,7 @@
 ### List of contents
 
 - [Introduction](#introduction)
-- [Architecture Diagram](#working)
+- [Architecture](#architecture)
 - [Installation](#installation)
 
 
@@ -19,7 +19,7 @@
 - Application is dockerized. 
 
 
-## Architecture Diagram
+## Architecture
 ---
 [(Back to top)](#list-of-contents)
 
