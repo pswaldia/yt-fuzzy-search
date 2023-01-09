@@ -24,7 +24,7 @@
 ---
 [(Back to top)](#list-of-contents)
 
-![img](https://i.imgur.com/ALDZaqc.png)
+![img](https://i.imgur.com/2EFnbgS.png)
 
 ## Installation
 ---
